@@ -9,30 +9,43 @@ elem = driver.find_element(By.CLASS_NAME, "fc-button")
 # elem.clear()
 # elem.send_keys("pycon")
 elem.send_keys(Keys.RETURN)
-time.sleep(2)
+time.sleep(4)
 elem = driver.find_element(By.ID, "langSelect-PL")
 print(elem)
 elem.click()
 time.sleep(2)
 
 elem = driver.find_element(By.ID, "bigCookie")
+i = 0
+prodValue = driver.find_element(By.ID, "productOwned0")
+prod = driver.find_element(By.ID, "product0")
+upgrade = driver.find_element(By.ID, "upgrade0")
+upgradeValue = driver.find_element(By.ID, "upgrade0")
 while(True):
     
     elem = driver.find_element(By.ID, "bigCookie")
     elem2 = driver.find_element(By.ID, "bigCookie")
-    prod = driver.find_element(By.ID, "product0")
+    
    
-    elem.send_keys(Keys.RETURN)
-    prodValue = driver.find_element(By.ID, "productOwned0")
+    # elem.send_keys(Keys.RETURN)
+    elem.click()
+    
     
     if(prod.get_attribute("class") == "product unlocked enabled"):
-            # print()
-            driver.find_element(By.ID, "product0").click()
+            prod.click()
+            if(prodValue.text == ""):
+                 prod.click()
+            else:
+                if(int(prodValue.text) == 14 ):
+                    
+                    i+=1
+                    prod = driver.find_element(By.ID, "product"+str(i))
+                    prodValue = driver.find_element(By.ID, "productOwned"+str(i))
+                    prod.click()
+                # driver.find_element(By.ID, "product0").click()
+
             
-            if int(prodValue.text) == 10:
-                time.sleep(10)
-                prod = driver.find_element(By.ID, "product1")
-                prodValue = driver.find_element(By.ID, "productOwned1")
+            
 
             
     
